@@ -13,5 +13,5 @@ node {
    stage 'Build'
    // Run the maven build
    shell "${mvnHome}/bin/mvn -Dmaven.test.failure.ignore clean package"
-   step([$class: 'JUnitResultArchiver', testResults: '**/TEST-*.xml'])
+   step(junit allowEmptyResults: true, testResults: '**/test-results/*.xml')
 }
