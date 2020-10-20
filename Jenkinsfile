@@ -13,7 +13,6 @@ node {
    stage 'Build'
    // Run the maven build
    shell "${mvnHome}/bin/mvn -Dmaven.test.failure.ignore clean package"
-   shell 'ln -s tests/test-results-unit.xml $WORKSPACE'
-  junit "test-results-unit.xml"
+   cp -r app/build/test-results $WORKSPACE/test-results
   step([$class: 'JUnitResultArchiver', testResults: '**/target/surefire-reports/TEST-*.xml'])
 }
